@@ -2,7 +2,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, QMessageBox, QRadioButton, QGroupBox)
 
-from random import choice
+from random import (choice, shuffle)
 from numpy import array_split
 
 from Questions import (Questions_dict, Answers_dict)
@@ -24,7 +24,9 @@ def pick_question(btn_1, btn_2, btn_3, btn_4):
     try:        # Εκτέλεσε μόνο αν υπάρχουν διαθέσιμες ερωτήσεις:
         submission.setText("Υποβολή")
                     
-        ButtonList = [btn_1,btn_2,btn_3,btn_4] # Φτιάφε λίστα με κουμπιά
+        ButtonList = [btn_1,btn_2,btn_3,btn_4]      # Φτιάφε λίστα με κουμπιά
+        
+        shuffle(ButtonList)         # Ανακάτεψε τα κουμπιά
                     
         key = choice(list(Questions_dict.keys()))   # Επίλεξε μία τυχέα ερώτηση
 
@@ -102,9 +104,6 @@ global button1
 global button2
 global button3
 global button4
-
-global Questions_dict
-global Answer_dict
 
 start_value = 0
 
