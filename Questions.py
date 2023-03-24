@@ -1,3 +1,6 @@
+global Questions_dict
+global Answers_dict
+
 # Ερωτήσεις (με πολλαπλές απαντήσεις):
 
 Questions_dict = {
