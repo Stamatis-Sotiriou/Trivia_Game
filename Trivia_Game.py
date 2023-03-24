@@ -1,4 +1,4 @@
-#Trivia Game V0.2.0 unstable release#
+#Trivia Game V0.2.5 unstable release#
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, QMessageBox, QRadioButton, QGroupBox)
 
