@@ -1,4 +1,4 @@
-#Trivia Game V0.2.5 unstable release#
+# Trivia Game V0.3 #
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, QMessageBox, QRadioButton, QGroupBox)
 
@@ -48,21 +48,7 @@ def pick_question(btn_1, btn_2, btn_3, btn_4):
         global_key = key
         
     except:     # Αφού τελειώσουν οι διαθέσιμες ερωτήσεις
-        group.hide()        # Κρύψε την ομάδα κουμπιών 
-        submission.hide()   # Κρύψε το κουμπί υποβολής
-        on_off.hide()       # Κρύψε το κουμπί on / off
-        
-        points = str(points)
-        lenght = len(Answers_dict)
-
-        if points == "1":
-            ap = "Από τις %s ερωτήσεις μόνο μια απαντήθηκε σωστά" % lenght
-        elif points == "0":
-            ap = "Από τις %s ερωτήσεις καμία δεν απαντήθηκε σωστά"
-        else:
-            ap = "Από τις %s ερωτήσεις οι %s απαντήθηκαν σωστά" % (lenght, points)
-        
-        question.setText(ap)    # Πρόβαλε τον αριθμό τον σωστών απαντήσεων
+        end_func()
 
 # Συνάρτηση ελέγχου απάντησης:
 
@@ -98,6 +84,49 @@ def user_answer(btn_1, btn_2, btn_3, btn_4):
         pick_question(btn_1, btn_2, btn_3, btn_4)
         start_value = start_value + 1
 
+def update_timer():
+    global remaining_time
+
+    remaining_time += -1
+
+    if remaining_time >= 0:
+        time_label.setText("Χρόνος που απομένει:\n%s" % str(remaining_time))
+    else:
+        timer.stop()
+
+        time_window.show()
+
+        end_func()
+        
+def end_func():
+
+    global points
+    
+    group.hide()        # Κρύψε την ομάδα κουμπιών 
+    submission.hide()   # Κρύψε το κουμπί υποβολής
+    on_off.hide()       # Κρύψε το κουμπί on / off
+    time_label.hide()   # Κρύψε τον χρόνοσ
+        
+    points = str(points)
+    ans_lenght = len(Answers_dict)
+
+    lenght = ans_lenght
+    try:
+        if points == "1":
+            ap = "Από τις %s ερωτήσεις μόνο μια απαντήθηκε σωστά." % lenght
+        elif points == "0":
+            ap = "Από τις %s ερωτήσεις καμία δεν απαντήθηκε σωστά." % lenght
+        elif points == str(ans_lenght):
+            ap = "Όλες οι ερωτήσεις απαντήθηκαν σωστά."
+        else:
+            ap = "Από τις %s ερωτήσεις οι %s απαντήθηκαν σωστά." % (lenght, points)
+            
+    except:
+        ap = "Δεν προσπάθισες καθόλου..."
+
+    question.setText(ap)    # Πρόβαλε τον αριθμό τον σωστών απαντήσεων
+
+
 # Αρχικοποίηση global μεταβλητών
 
 global button1
@@ -110,6 +139,17 @@ start_value = 0
 # Labels:
 
 question = QLabel("Εδώ θα εμφανίζονται οι ερωτήσεις και κάτω \nοι πιθανές απανήσεις.")
+
+time_label = QLabel("Χρονόμετρο")
+
+# Χρονόμετρο:
+
+remaining_time = 10
+
+timer = QTimer()
+timer.setInterval(1000)
+
+timer.timeout.connect(update_timer)
 
 # Αρχικοποίηση παραθύρων:
 
@@ -156,6 +196,10 @@ wrong.setIcon(QMessageBox.Critical)
 wrong.setText("Η απάντησή σου είναι λάθος.")
 wrong.setStandardButtons(QMessageBox.Ok)
 
+time_window = QMessageBox()
+time_window.setIcon(QMessageBox.Warning)
+time_window.setText("Τέλος χρόνου!")
+time_window.setStandardButtons(QMessageBox.Ok)
 
 # Κουμπιά // επιλογές:
 
