@@ -144,7 +144,7 @@ time_label = QLabel("Χρονόμετρο")
 
 # Χρονόμετρο:
 
-remaining_time = 10
+remaining_time = 120
 
 timer = QTimer()
 timer.setInterval(1000)
