@@ -43,7 +43,7 @@ def pick_question(btn_1, btn_2, btn_3, btn_4):
                 array = ', '.join(array)    # Αφαίρεσε στοιχεία όπως το ', '
                 button.setText(array)       # Τοποθέτησε την ερώτηση στο κουμπί
                 ButtonList.remove(button)   # Αφαίρεσε το κουμπί από την λίστα
-                break       # Σπάσε (εδώ έκανα μια πατέντα ώστε να σπάσει ο βρόχος και να επιλεγχτεί η επόμενη ερώτηση)
+                break
                         
         global_key = key
         
@@ -105,7 +105,7 @@ def end_func():
     group.hide()        # Κρύψε την ομάδα κουμπιών 
     submission.hide()   # Κρύψε το κουμπί υποβολής
     on_off.hide()       # Κρύψε το κουμπί on / off
-    time_label.hide()   # Κρύψε τον χρόνοσ
+    time_label.hide()   # Κρύψε τον χρόνο
         
     points = str(points)
     ans_lenght = len(Answers_dict)
@@ -122,9 +122,9 @@ def end_func():
             ap = "Από τις %s ερωτήσεις οι %s απαντήθηκαν σωστά." % (lenght, points)
             
     except:
-        ap = "Δεν προσπάθισες καθόλου..."
+        ap = "Δεν προσπάθησες καθόλου..."
 
-    question.setText(ap)    # Πρόβαλε τον αριθμό τον σωστών απαντήσεων
+    question.setText(ap)    # Δε τον αριθμό τον σωστών απαντήσεων
 
 
 # Αρχικοποίηση global μεταβλητών
